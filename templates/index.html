@@ -10,15 +10,16 @@
         <h1>SIGN UP</h1>
         <form action="/welcome" method='POST'>
             <table>
-                <tbody>
+                
                     <tr>
                         <td>
                             <label for="user_name">Username</label>
                         </td>
                         <td>
-                            <input type='text' name='user_name' value="{{name}}"/>
+                            <input type='text' name='user' value="{{name}}"/>
+                        </td>
+                        <td>
                             <span class="error">{{user_name_error}}</span>
-
                         </td>
                     </tr>
                     <tr>
@@ -26,7 +27,9 @@
                             <label for="password">Password</label>
                         </td>
                         <td>
-                            <input type='password' name='password'>
+                            <input type='password' name='pass'>  
+                        </td>
+                        <td>
                             <span class="error">{{password_error}}</span>
                         </td>
                     </tr>
@@ -35,7 +38,10 @@
                             <label for="verify">Verify Password</label>
                         </td>
                         <td>
-                            <input type='password' name = 'verify'>
+                            <input type='password' name = 'secondpass'>
+                            
+                        </td>
+                        <td>
                             <span class="error">{{verify_error}}</span>
                         </td>
                     </tr>
@@ -45,10 +51,11 @@
                         </td>
                         <td>
                             <input type='text' name='email' value="{{email}}">
+                        </td>
+                        <td>
                             <span class="error">{{email_error}}</span>
                         </td>
                     </tr>
-                </tbody>
             </table>
             
             <input type='submit'/>

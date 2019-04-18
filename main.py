@@ -17,27 +17,27 @@ def index():
 
 @app.route("/welcome", methods=['POST'])
 def welcome():
-    user_name = request.form['user_name']
-    password = request.form['password']
-    verify =request.form['verify']
+    user_name = request.form['user']
+    password = request.form['pass']
+    verify =request.form['secondpass']
     email = request.form['email']
         
             
         
 
-    user_name_error=''
+    user_error=''
     password_error=''
     verify_error=''
     email_error=''
 
     #Verify username
     if user_name =='':
-        user_name_error="Please enter a valid username"
+        user_error="Please enter a valid username"
     elif len(user_name)<3 or len(user_name)>20:
-        user_name_error="Username must be between 3 and 20 characters long"
+        user_error="Username must be between 3 and 20 characters long"
         user_name = ''
     elif ' ' in user_name:
-        user_name_error= "Your username cannot contain any spaces"
+        user_error= "Your username cannot contain any spaces"
         
 
 
@@ -61,13 +61,13 @@ def welcome():
             email_error="Not a valid email address."    
     
     #without errors
-    if not user_name_error and not password_error and not verify_error and not email_error:
+    if not user_error and not password_error and not verify_error and not email_error:
         template = jinja_env.get_template('welcome.html')
         return template.render(name=user_name)
 
 
     else:
         template = jinja_env.get_template('index.html')
-        return template.render(name=user_name, user_name_error = user_name_error,password_error = password_error, verify_error=verify_error, email = email, email_error = email_error)
+        return template.render(name=user_name, user_name_error = user_error,password_error = password_error, verify_error=verify_error, email = email, email_error = email_error)
 
 app.run()
