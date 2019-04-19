@@ -51,10 +51,15 @@ def welcome():
 
     #verify email
     if email !='':
-        match= re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email)
-        if match==None:
-            email_error="Not a valid email address."    
-    
+        if len(email)<3 or len(email)>20:
+            email_error="Email must be between 3 and 20 characters"
+
+        elif email.count(".")>1:
+            email_error=". or @ should not exceed one."
+
+        elif " " in email:
+            email_error="Email should not contain any spaces"
+           
     #without errors
     if not user_error and not password_error and not verify_error and not email_error:    
         return render_template('welcome.html',name=user_name)
