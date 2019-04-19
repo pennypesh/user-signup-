@@ -1,19 +1,14 @@
-from flask import Flask, request
+from flask import Flask, request,render_template
 import cgi
 import os
-import jinja2
 import re
-
-template_dir = os.path.join(os.path.dirname(__file__), 'templates')
-jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir))
 
 app = Flask (__name__)
 app.config['DEBUG']= True
 
 @app.route("/")
-def index():
-    template = jinja_env.get_template('index.html')
-    return template.render()
+def index():    
+    return render_template('index.html')
 
 @app.route("/welcome", methods=['POST'])
 def welcome():
@@ -61,13 +56,11 @@ def welcome():
             email_error="Not a valid email address."    
     
     #without errors
-    if not user_error and not password_error and not verify_error and not email_error:
-        template = jinja_env.get_template('welcome.html')
-        return template.render(name=user_name)
+    if not user_error and not password_error and not verify_error and not email_error:    
+        return render_template('welcome.html',name=user_name)
 
 
-    else:
-        template = jinja_env.get_template('index.html')
-        return template.render(name=user_name, user_name_error = user_error,password_error = password_error, verify_error=verify_error, email = email, email_error = email_error)
+    else:    
+        return render_template('index.html',name=user_name, user_name_error = user_error,password_error = password_error, verify_error=verify_error, email = email, email_error = email_error)
 
 app.run()
